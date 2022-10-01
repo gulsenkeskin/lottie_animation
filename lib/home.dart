@@ -8,7 +8,26 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(
+      //animasyonun ne kadar süreyle oynatılacağı
+      duration: const Duration(seconds: 3), vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
@@ -17,7 +36,9 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          Lottie.asset('assets/delivery.json', ),
+          Lottie.asset(
+            'assets/delivery.json',
+          ),
           //Lottie.network('https://assets9.lottiefiles.com/packages/lf20_jmejybvu.json'),
           const SizedBox(height: 32),
           ElevatedButton.icon(
@@ -42,7 +63,10 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Lottie.asset('assets/done.json', repeat: false),
+                Lottie.asset('assets/done.json',
+                    repeat: false,
+                    //animasyon tamamlandıktan sonra tekrar gizleyebilmek için controller ekledim
+                    controller: controller),
                 const Text(
                   'Enjoy your order',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
