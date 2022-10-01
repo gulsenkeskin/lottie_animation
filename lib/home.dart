@@ -17,24 +17,40 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          Lottie.asset('assets/delivery.json'),
+          Lottie.asset('assets/delivery.json', ),
           //Lottie.network('https://assets9.lottiefiles.com/packages/lf20_jmejybvu.json'),
           const SizedBox(height: 32),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: showDoneDialog,
             icon: const Icon(
               Icons.delivery_dining,
               size: 40,
             ),
-            label:const Text('Order Pizza'),
+            label: const Text('Order Pizza'),
             style: ElevatedButton.styleFrom(
-              padding:const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              textStyle:const TextStyle(fontSize: 28),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              textStyle: const TextStyle(fontSize: 28),
             ),
           )
         ],
       ));
 
-
-
+  void showDoneDialog() => showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => Dialog(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Lottie.asset('assets/done.json', repeat: false),
+                const Text(
+                  'Enjoy your order',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
+          ));
 }
