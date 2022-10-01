@@ -20,6 +20,15 @@ class _HomePageState extends State<HomePage>
       //animasyonun ne kadar süreyle oynatılacağı
       duration: const Duration(seconds: 3), vsync: this,
     );
+
+    //animasyonu kontrol edebilmek için
+    controller.addStatusListener((status) async {
+      if (status == AnimationStatus.completed) {
+        //animasyon tamamlanınca dialog kapansın ve animasyon sıfırlansın
+        Navigator.pop(context);
+        controller.reset();
+      }
+    });
   }
 
   @override
@@ -66,7 +75,12 @@ class _HomePageState extends State<HomePage>
                 Lottie.asset('assets/done.json',
                     repeat: false,
                     //animasyon tamamlandıktan sonra tekrar gizleyebilmek için controller ekledim
-                    controller: controller),
+                    controller: controller,
+                    //animasyonu yükler
+                    onLoaded: (composition) {
+                  //forward ile animasyon başlatılır
+                  controller.forward();
+                }),
                 const Text(
                   'Enjoy your order',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
