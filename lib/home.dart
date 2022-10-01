@@ -17,8 +17,9 @@ class _HomePageState extends State<HomePage>
     super.initState();
 
     controller = AnimationController(
-      //animasyonun ne kadar süreyle oynatılacağı
-      duration: const Duration(seconds: 3), vsync: this,
+      //animasyonun ne kadar süreyle oynatılacağı //todo lottie dosyasından alındı
+      // duration: const Duration(seconds: 3),
+      vsync: this,
     );
 
     //animasyonu kontrol edebilmek için
@@ -78,6 +79,8 @@ class _HomePageState extends State<HomePage>
                     controller: controller,
                     //animasyonu yükler
                     onLoaded: (composition) {
+                  //dosyadan animasyon süresi alma
+                  controller.duration=composition.duration;
                   //forward ile animasyon başlatılır
                   controller.forward();
                 }),
