@@ -1,3 +1,7 @@
+<img src='ss/1.gif' width="360" height="680"/>
+<img src='ss/1.png' width="360" height="680"/><img src='ss/2.png' width="360" height="680"/>
+
+
 ### Used Packages:
 
 lottie : https://pub.dev/packages/lottie/install
